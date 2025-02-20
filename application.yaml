@@ -5,3 +5,4 @@ db:
   user: "root"
   pwd: "qwer1234"
   schema: "easyai_core"
+  echo: true
