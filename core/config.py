@@ -1,6 +1,6 @@
-from typing import Literal
-
 import msgspec
+
+from typing import Literal
 from sqlalchemy import URL
 
 

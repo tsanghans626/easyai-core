@@ -1,3 +1,5 @@
+from litestar.params import Parameter
+from litestar.plugins.sqlalchemy import filters
 from litestar.plugins.sqlalchemy import (
     SQLAlchemyAsyncConfig,
     AsyncSessionConfig,
@@ -16,3 +18,15 @@ sqlalchemy_config = SQLAlchemyAsyncConfig(
     create_all=True,
 )
 alchemy = SQLAlchemyPlugin(config=sqlalchemy_config)
+
+
+def provide_limit_offset_pagination(
+    current_page: int = Parameter(ge=1, query="currentPage", default=1, required=False),
+    page_size: int = Parameter(
+        query="pageSize",
+        ge=1,
+        default=10,
+        required=False,
+    ),
+) -> filters.FilterTypes:
+    return filters.LimitOffset(page_size, page_size * (current_page - 1))

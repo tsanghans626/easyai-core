@@ -1,4 +1,4 @@
-from litestar import Controller, post, get
+from litestar import Controller, post, get, put, delete
 from litestar.di import Provide
 from litestar.pagination import OffsetPagination
 from litestar.repository.filters import LimitOffset
@@ -33,3 +33,15 @@ class ArticleController(Controller):
             limit=limit_offset.limit,
             offset=limit_offset.offset,
         )
+
+    @put("/{item_id:int}")
+    async def update_article(
+        self, item_id: int, articles_service: ArticleService, data: Article
+    ) -> Article:
+        return await articles_service.update(data, item_id=item_id)
+
+    @delete("/{item_id:int}")
+    async def delete_article(
+        self, item_id: int, articles_service: ArticleService
+    ) -> None:
+        await articles_service.delete(item_id=item_id)

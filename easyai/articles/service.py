@@ -1,9 +1,10 @@
 from typing import AsyncGenerator
 
-from sqlalchemy.ext.asyncio import AsyncSession
 from advanced_alchemy.repository import SQLAlchemyAsyncRepository
 from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService
 from easyai.articles.model.entity import Article
+
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class ArticleRepo(SQLAlchemyAsyncRepository[Article]):

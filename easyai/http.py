@@ -1,7 +1,7 @@
 from litestar import Litestar
 from litestar.di import Provide
 from litestar.openapi import OpenAPIConfig
-from core.db import alchemy
+from core.db import alchemy, provide_limit_offset_pagination
 from core.exc import (
     BusinessException,
     ServerException,
@@ -10,7 +10,6 @@ from core.exc import (
 )
 from core.exc.handler import unexpected_error_handler
 from core.log import struct_log
-from core.paginate import provide_limit_offset_pagination
 from easyai.articles.controller import ArticleController
 
 
