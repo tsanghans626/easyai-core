@@ -2,8 +2,8 @@ import traceback
 
 from litestar import Request, Response, MediaType
 from litestar import status_codes
-from core.config import settings
-from core.exc import BusinessException, ServerException
+from starters.config import settings
+from starters.exc import BusinessException, ServerException
 
 
 def business_exception_handler(_: Request, exc: BusinessException):

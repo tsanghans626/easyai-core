@@ -1,8 +1,12 @@
 env: "development"
 db:
   host: "localhost"
-  port: 3306
+  port: 23306
   user: "root"
   pwd: "qwer1234"
   schema: "easyai_core"
   echo: true
+auth:
+  secret: "fb4dce1cbc60b12e7d30f4b69ee6d873e4d937100bb34bda3fd8d1878dddc5fc"
+  superuser: "admin"
+  superuser_pwd: "qwer1234"

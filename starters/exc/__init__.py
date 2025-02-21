@@ -1,6 +1,10 @@
 from .ec import BaseEC
 from .error import BusinessException, ServerException
-from .handler import business_exception_handler, server_exception_handler
+from .handler import (
+    business_exception_handler,
+    server_exception_handler,
+    unexpected_error_handler,
+)
 
 __all__ = [
     "BaseEC",
@@ -8,4 +12,5 @@ __all__ = [
     "ServerException",
     "business_exception_handler",
     "server_exception_handler",
+    "unexpected_error_handler",
 ]

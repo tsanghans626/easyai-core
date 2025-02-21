@@ -28,8 +28,15 @@ class DbSettings(msgspec.Struct):
         )
 
 
+class AuthSettings(msgspec.Struct):
+    secret: str
+    superuser: str
+    superuser_pwd: str
+
+
 class Settings(msgspec.Struct):
     db: DbSettings
+    auth: AuthSettings
     env: Literal["production", "test", "development"] = "production"
 
 

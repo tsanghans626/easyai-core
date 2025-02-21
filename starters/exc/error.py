@@ -1,4 +1,4 @@
-from core.exc.ec import BaseEC
+from starters.exc.ec import BaseEC
 
 
 class BusinessException(Exception):
