@@ -4,6 +4,7 @@ from .handler import (
     business_exception_handler,
     server_exception_handler,
     unexpected_error_handler,
+    notfound_handler,
 )
 
 __all__ = [
@@ -13,4 +14,5 @@ __all__ = [
     "business_exception_handler",
     "server_exception_handler",
     "unexpected_error_handler",
+    "notfound_handler",
 ]

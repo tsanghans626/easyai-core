@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from litestar.exceptions import NotFoundException
 from litestar.config.app import AppConfig
 from litestar.di import Provide
 from litestar.openapi import OpenAPIConfig
@@ -16,14 +17,17 @@ from starters.exc import (
     business_exception_handler,
     server_exception_handler,
     unexpected_error_handler,
+    notfound_handler,
 )
 from starters.db import alchemy, provide_limit_offset_pagination
-from starters.auth import jwt_auth
+from starters.auth import jwt_cookie_auth, login, init, login_view
 
 
 class FullstackStarterPlugin(InitPluginProtocol):
     def on_app_init(self, app_config: AppConfig) -> AppConfig:
-        app_config.route_handlers.extend([create_static_files_router(path="/", directories=["assets"])])
+        app_config.route_handlers.extend(
+            [create_static_files_router(path="/", directories=["assets"]), login, init, login_view]
+        )
         app_config.plugins.extend([StructlogPlugin(), alchemy, HTMXPlugin()])
 
         app_config.template_config = TemplateConfig(
@@ -32,6 +36,7 @@ class FullstackStarterPlugin(InitPluginProtocol):
         )
         app_config.exception_handlers = {
             BusinessException: business_exception_handler,
+            NotFoundException: notfound_handler,
             ServerException: server_exception_handler,
             Exception: unexpected_error_handler,
         }
@@ -40,7 +45,7 @@ class FullstackStarterPlugin(InitPluginProtocol):
                 provide_limit_offset_pagination, sync_to_thread=False
             )
         }
-        app_config.openapi_config = (OpenAPIConfig(title="My API", version="1.0.0"))
+        app_config.openapi_config = OpenAPIConfig(title="My API", version="1.0.0")
 
-        jwt_auth.on_app_init(app_config)
+        jwt_cookie_auth.on_app_init(app_config)
         return app_config

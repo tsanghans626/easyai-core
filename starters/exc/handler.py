@@ -2,6 +2,9 @@ import traceback
 
 from litestar import Request, Response, MediaType
 from litestar import status_codes
+from litestar.exceptions import NotFoundException
+from litestar.plugins.htmx import HTMXTemplate
+from litestar.response import Template
 from starters.config import settings
 from starters.exc import BusinessException, ServerException
 
@@ -37,3 +40,6 @@ def unexpected_error_handler(_: Request, exc: Exception):
         status_code=status_codes.HTTP_500_INTERNAL_SERVER_ERROR,
         content={"detail": detail},
     )
+
+def notfound_handler(_: Request, exc: NotFoundException) -> Template:
+    return HTMXTemplate(template_name="404.html.jinja")
