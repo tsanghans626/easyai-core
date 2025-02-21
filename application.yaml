@@ -1,7 +1,7 @@
 env: "development"
 db:
   host: "localhost"
-  port: 23306
+  port: 3306
   user: "root"
   pwd: "qwer1234"
   schema: "easyai_core"

@@ -7,13 +7,42 @@
   <script src="https://unpkg.com/htmx.org@2.0.4"
     integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
     crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
   {% endblock %}
 </head>
 
 <body>
-  <div id="content">{% block content %}{% endblock %}</div>
+  <div id="error">
+    {% block error %}
+    <!-- 错误提示模板 -->
+    <div id="business-error" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+      <div class="modal modal-open">
+        <div class="modal-box">
+          <h2 class="font-bold text-lg">错误</h2>
+          <div class="alert alert-error">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="error-message" hx-text="response.detail.msg"></span>
+          </div>
+          <div class="modal-action">
+            <button class="btn" onclick="document.getElementById('business-error').classList.add('hidden')">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </div>
+
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+
   <div id="footer">
     {% block footer %}
     {% endblock %}

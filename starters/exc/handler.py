@@ -10,11 +10,14 @@ from starters.exc import BusinessException, ServerException
 
 
 def business_exception_handler(_: Request, exc: BusinessException):
-    return Response(
+    response = Response(
         media_type=MediaType.JSON,
         content={"detail": {"code": exc.code, "msg": exc.msg}},
         status_code=status_codes.HTTP_400_BAD_REQUEST,
     )
+    response.headers.update({"HX-Retarget": "#business-error"})
+    response.headers.update({"HX-Reswap": "#innerHTML"})
+    return response
 
 
 def server_exception_handler(_: Request, exc: ServerException):

@@ -23,7 +23,7 @@
       </div>
 
       <!-- 直接平铺的表单 -->
-      <form hx-post="/api/login" hx-target="#login-result" hx-swap="innerHTML"
+      <form hx-post="/api/login" hx-target-400="#business-error" hx-target-500="#server-error"
         enctype="application/x-www-form-urlencoded" class="space-y-4">
         <!-- 用户名输入 -->
         <div class="form-control">
@@ -41,26 +41,13 @@
           <input type="password" name="password" placeholder="请输入密码" class="input input-bordered input-lg" required>
         </div>
 
-        <!-- 错误提示 -->
-        <div id="login-result"></div>
-
         <!-- 提交按钮 -->
         <button type="submit" class="btn btn-primary btn-block btn-lg mt-6">
           立即登录
         </button>
+
       </form>
     </div>
   </div>
-
-  <!-- 错误提示模板 -->
-  <template id="error-template">
-    <div class="alert alert-error">
-      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-      <span class="error-message"></span>
-    </div>
-  </template>
 </div>
 {% endblock %}
