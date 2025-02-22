@@ -5,8 +5,8 @@ from litestar import status_codes
 from litestar.exceptions import NotFoundException
 from litestar.plugins.htmx import HTMXTemplate
 from litestar.response import Template
-from starters.config import settings
-from starters.exc import BusinessException
+from htmx_fullstack_starter.config import settings
+from htmx_fullstack_starter.exc import BusinessException
 
 
 def business_exception_handler(_: Request, exc: BusinessException):

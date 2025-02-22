@@ -1,4 +1,4 @@
-from starters.exc import BaseEC
+from htmx_fullstack_starter.exc import BaseEC
 
 
 class AuthEC(BaseEC):

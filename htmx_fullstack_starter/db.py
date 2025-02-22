@@ -6,7 +6,7 @@ from litestar.plugins.sqlalchemy import (
     SQLAlchemyPlugin,
 )
 from advanced_alchemy.base import BigIntAuditBase
-from starters.config import settings
+from htmx_fullstack_starter.config import settings
 
 
 session_config = AsyncSessionConfig(expire_on_commit=False)

@@ -3,7 +3,7 @@ from typing import AsyncGenerator
 from advanced_alchemy.repository import SQLAlchemyAsyncRepository
 from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService
 
-from starters.auth.model.entity import User, SuperUser
+from htmx_fullstack_starter.auth.model.entity import User, SuperUser
 
 from sqlalchemy.ext.asyncio import AsyncSession
 

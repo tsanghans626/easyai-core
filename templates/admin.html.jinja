@@ -1,0 +1,70 @@
+{% extends "base.html.jinja" %}
+{% block title %}主页{% endblock %}
+{% block content %}
+<div class="flex flex-col h-screen bg-gray-50 text-white">
+    <div class="navbar bg-gray-800 rounded-b-lg">
+        <div class="flex-1">
+            <a class="btn btn-ghost text-xl">EasyAI</a>
+        </div>
+        <div class="flex-none gap-2">
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img alt="Tailwind CSS Navbar component"
+                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    </div>
+                </div>
+                <ul tabindex="0"
+                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    <li>
+                        <a class="justify-between">
+                            Profile
+                            <span class="badge">New</span>
+                        </a>
+                    </li>
+                    <li><a>Settings</a></li>
+                    <li><a>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-1">
+        <ul class="menu bg-gray-200 text-gray-800 rounded-r-l w-56 ">
+            <li><a>Item 1</a></li>
+            <li>
+                <details open>
+                    <summary>Parent</summary>
+                    <ul>
+                        <li><a>Submenu 1</a></li>
+                        <li><a>Submenu 2</a></li>
+                        <li>
+                            <details open>
+                                <summary>Parent</summary>
+                                <ul>
+                                    <li><a>Submenu 1</a></li>
+                                    <li><a>Submenu 2</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+            <li><a>Item 3</a></li>
+        </ul>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4">
+            <h2 class="text-2xl mb-4">模块内容</h2>
+            <div id="content" hx-get="/your-endpoint" hx-target="#content" hx-swap="innerHTML">
+                <!-- 模块内容将通过 HTMX 加载 -->
+                <p>请点击左侧菜单以加载模块内容。</p>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-gray-800 text-white p-4 text-center rounded-t-lg">
+        <p>© 2025 管理端系统</p>
+    </footer>
+</div>
+{% endblock %}

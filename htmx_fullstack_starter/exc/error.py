@@ -1,4 +1,4 @@
-from starters.exc.ec import BaseEC
+from htmx_fullstack_starter.exc.ec import BaseEC
 
 
 class BusinessException(Exception):

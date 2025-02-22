@@ -6,18 +6,18 @@ from litestar.di import Provide
 from litestar.enums import RequestEncodingType
 
 
-from starters.exc import BusinessException
-from starters.auth.service import (
+from htmx_fullstack_starter.exc import BusinessException
+from htmx_fullstack_starter.auth.service import (
     provide_super_users_service,
     SuperUserService,
     provide_user_service,
     UserService,
 )
-from starters.auth.model.dto import SuperUserLogin
-from starters.auth.model.ec import AuthEC
-from starters.auth.jwt import jwt_cookie_auth
-from starters.auth.model.entity import User, SuperUser
-from starters.config import settings
+from htmx_fullstack_starter.auth.model.dto import SuperUserLogin
+from htmx_fullstack_starter.auth.model.ec import AuthEC
+from htmx_fullstack_starter.auth.jwt import jwt_cookie_auth
+from htmx_fullstack_starter.auth.model.entity import User, SuperUser
+from htmx_fullstack_starter.config import settings
 
 
 @post(

@@ -3,7 +3,9 @@
 
 <head>
   {% block head %}
-  <title>{% block title %}{% endblock %}</title>
+  <title>后台管理系统-{% block title %}{% endblock %}</title>
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+
   <script src="https://unpkg.com/htmx.org@2.0.4"
     integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
     crossorigin="anonymous"></script>
@@ -21,20 +23,11 @@
     {% endblock %}
   </div>
 
-  <div id="header">
-    {% block header %}
-    {% endblock %}
-  </div>
-
   <div id="content">
     {% block content %}
     {% endblock %}
   </div>
 
-  <div id="footer">
-    {% block footer %}
-    {% endblock %}
-  </div>
 </body>
 
 </html>
