@@ -6,42 +6,25 @@ from litestar.exceptions import NotFoundException
 from litestar.plugins.htmx import HTMXTemplate
 from litestar.response import Template
 from starters.config import settings
-from starters.exc import BusinessException, ServerException
+from starters.exc import BusinessException
+
 
 
 def business_exception_handler(_: Request, exc: BusinessException):
-    response = Response(
-        media_type=MediaType.JSON,
-        content={"detail": {"code": exc.code, "msg": exc.msg}},
-        status_code=status_codes.HTTP_400_BAD_REQUEST,
-    )
-    response.headers.update({"HX-Retarget": "#business-error"})
-    response.headers.update({"HX-Reswap": "#innerHTML"})
-    return response
-
-
-def server_exception_handler(_: Request, exc: ServerException):
-    detail = {"code": 999998, "msg": "请联系管理员"}
-    if settings.env == "development":
-        detail.update({"traceback": traceback.format_exc()})
-        detail.update({"msg": exc.msg})
-
-    return Response(
-        media_type=MediaType.JSON,
-        status_code=status_codes.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"detail": detail},
+    return HTMXTemplate(
+        template_name="error.html.jinja",
+        context={"error_msg": exc.msg},
+        re_swap="outerHTML",
+        re_target="#error"
     )
 
 
 def unexpected_error_handler(_: Request, exc: Exception):
-    detail = {"code": 999999, "msg": "请联系管理员"}
-    if settings.env == "development":
-        detail.update({"traceback": traceback.format_exc()})
-
-    return Response(
-        media_type=MediaType.JSON,
-        status_code=status_codes.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"detail": detail},
+    return HTMXTemplate(
+        template_name="error.html.jinja",
+        context={"error_msg": "请联系管理员"},
+        re_swap="outerHTML",
+        re_target="#error"
     )
 
 def notfound_handler(_: Request, exc: NotFoundException) -> Template:

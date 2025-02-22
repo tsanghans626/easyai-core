@@ -13,9 +13,7 @@ from litestar.static_files import create_static_files_router
 
 from starters.exc import (
     BusinessException,
-    ServerException,
     business_exception_handler,
-    server_exception_handler,
     unexpected_error_handler,
     notfound_handler,
 )
@@ -37,7 +35,6 @@ class FullstackStarterPlugin(InitPluginProtocol):
         app_config.exception_handlers = {
             BusinessException: business_exception_handler,
             NotFoundException: notfound_handler,
-            ServerException: server_exception_handler,
             Exception: unexpected_error_handler,
         }
         app_config.dependencies = {

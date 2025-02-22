@@ -23,7 +23,7 @@
       </div>
 
       <!-- 直接平铺的表单 -->
-      <form hx-post="/api/login" hx-target-400="#business-error" hx-target-500="#server-error"
+      <form hx-post="/api/login" hx-target="#business-error" hx-swap="innerHTML"
         enctype="application/x-www-form-urlencoded" class="space-y-4">
         <!-- 用户名输入 -->
         <div class="form-control">
@@ -45,6 +45,8 @@
         <button type="submit" class="btn btn-primary btn-block btn-lg mt-6">
           立即登录
         </button>
+
+        <div id="business-error"></div>
 
       </form>
     </div>
