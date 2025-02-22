@@ -18,13 +18,23 @@ from starters.exc import (
     notfound_handler,
 )
 from starters.db import alchemy, provide_limit_offset_pagination
-from starters.auth import jwt_cookie_auth, login, init, login_view
+from starters.auth import (
+    jwt_cookie_auth,
+    init,
+    create_admin_token,
+    get_admin_login_view,
+)
 
 
 class FullstackStarterPlugin(InitPluginProtocol):
     def on_app_init(self, app_config: AppConfig) -> AppConfig:
         app_config.route_handlers.extend(
-            [create_static_files_router(path="/", directories=["assets"]), login, init, login_view]
+            [
+                create_static_files_router(path="/", directories=["assets"]),
+                create_admin_token,
+                init,
+                get_admin_login_view,
+            ]
         )
         app_config.plugins.extend([StructlogPlugin(), alchemy, HTMXPlugin()])
 

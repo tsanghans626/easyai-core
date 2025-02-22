@@ -1,10 +1,11 @@
 from typing import Annotated
+
 from litestar import post, status_codes
+from litestar.params import Body
 from litestar.di import Provide
 from litestar.enums import RequestEncodingType
-from litestar.params import Body
 
-from starters.auth import jwt_cookie_auth
+
 from starters.exc import BusinessException
 from starters.auth.service import (
     provide_super_users_service,
@@ -12,21 +13,21 @@ from starters.auth.service import (
     provide_user_service,
     UserService,
 )
-from starters.auth.model.dto import SuperUserLogin, SuperUserOut
-from starters.auth.model.entity import User, SuperUser
+from starters.auth.model.dto import SuperUserLogin
 from starters.auth.model.ec import AuthEC
+from starters.auth.jwt import jwt_cookie_auth
+from starters.auth.model.entity import User, SuperUser
 from starters.config import settings
 
 
 @post(
-    path="/api/login",
-    tags=["登陆"],
+    "/admin/token",
     dependencies={"super_user_service": Provide(provide_super_users_service)},
 )
-async def login(
+async def create_admin_token(
     super_user_service: SuperUserService,
     data: Annotated[SuperUserLogin, Body(media_type=RequestEncodingType.URL_ENCODED)],
-) -> SuperUserOut:
+) -> None:
     obj = await super_user_service.get_one_or_none(
         super_user_service.model_type.username == data.username
     )
@@ -34,9 +35,8 @@ async def login(
         raise BusinessException(AuthEC.LOGIN_FAILED)
     response = jwt_cookie_auth.login(
         identifier=str(obj.user_id),
-        response_body=super_user_service.to_schema(obj, schema_type=SuperUserOut),
     )
-    response.headers.update({"HX-Redirect": "/admin/dashboard"})
+    response.headers.update({"HX-Redirect": "/admin"})
     return response
 
 
